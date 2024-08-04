@@ -1,0 +1,19 @@
+{
+  "name": "astro01",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host=0.0.0.0 --port=3000",
+    "start": "astro dev --host=0.0.0.0 --port=3000",
+    "build": "astro check && astro build",
+    "preview": "astro preview --host=0.0.0.0 --port=3000",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.1",
+    "@astrojs/svelte": "^5.7.0",
+    "astro": "^4.13.0",
+    "svelte": "^4.2.18",
+    "typescript": "^5.5.4"
+  }
+}
