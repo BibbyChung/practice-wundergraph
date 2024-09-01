@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "pnpm run --parallel --filter=./code/app/* start",
-    "generate": "pnpm run --filter wg-proxy generate",
-    "build": "pnpm run generate",
+    "start": "pnpm run --parallel --filter=./code/apps/* start",
+    "build": "pnpm run --filter=./code/apps/wg-proxy build && pnpm run --filter=./code/apps/astro01 build",
+    "start:prod": "pnpm run --filter=./code/apps/* start:prod",
     "check": "tsc --noEmit",
     "test": "jest"
   },

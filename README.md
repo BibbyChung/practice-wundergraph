@@ -60,6 +60,12 @@ https://docs.wundergraph.com/docs/architecture/wundergraph-conventions#everythin
 
 ```
 
+## todos
+
+- docker version for prod
+
+---
+
 ### Install dependencies
 
 ```shell

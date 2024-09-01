@@ -1,0 +1,14 @@
+# pnpm
+.pnpm-store
+.pnpm
+.pnpm-debug.log*
+
+**/.git
+**/.DS_Store
+**/node_modules
+
+**/.cache
+**/dist
+**/build
+**/.svelte
+**/.env

@@ -1,0 +1,35 @@
+services:
+  proxy:
+    build:
+      context: ../../
+      dockerfile: ./ops/prod/docker/proxy.dockerfile
+    depends_on:
+      - astro
+      # - wg-proxy
+    ports:
+      - "80:80"
+  
+  astro:
+    build:
+      context: ../../
+      dockerfile: ./ops/prod/docker/astro.dockerfile
+
+  wg-proxy:
+    build:
+      context: ../../
+      dockerfile: ./ops/prod/docker/wg-proxy.dockerfile
+
+  # p-proxy:
+  #   build:
+  #     context: ../../
+  #     dockerfile: ./ops/prod/docker/nginx.dockerfile
+  #   ports: 
+  #     - "443:443"
+  #     - "80:80"
+  #   depends_on:
+  #     - p-app
+  #     - p-admin
+  #   restart: always
+  #   volumes:
+  #     - ../../ops/prod/nginx/nginx.conf:/etc/nginx/nginx.conf
+  #     - ../../ops/prod/nginx/ssl/:/etc/nginx/ssl/

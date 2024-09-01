@@ -42,4 +42,4 @@ yarn-error.log*
 .vercel
 
 # application
-code/app/wg-proxy/.wundergraph
+code/apps/wg-proxy/.wundergraph
