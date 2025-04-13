@@ -15,15 +15,35 @@ docker run -d \
   -p 5433:5432 \
   postgres:16.3-alpine
   
-npx postgraphile -c 'postgres://postgres:9987654321qaz@127.0.0.1:5433/DVD' \
+npx postgraphile -c 'postgres://dvdrental_admin:07770ad8-da77-41c3-92f8-8b397075f732@localhost:8888/dvdrental_db' \
   --watch \
   --skip-plugins graphile-build:NodePlugin \
   --enhance-graphiql \
   --dynamic-json \
   --allow-explain
 
+
+
+======================
+
+localhost:5432
+dvdrental_db
+dvdrental_admin
+40a6adea4d414b7bb786567c007ebc61
+
+npx postgraphile -c 'postgres://dvdrental_admin:40a6adea4d414b7bb786567c007ebc61@localhost:5432/dvdrental_db' \
+  --watch \
+  --skip-plugins graphile-build:NodePlugin \
+  --enhance-graphiql \
+  --dynamic-json \
+  --allow-explain
+
+
 === examples ===
 https://docs.wundergraph.com/docs/architecture
+
+
+https://bff-docs.wundergraph.com/
 
 https://github.com/wundergraph/wundergraph/tree/main/examples
 npx create-wundergraph-app wundergraph-astro01 -E astro
