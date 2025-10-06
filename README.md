@@ -1,43 +1,61 @@
 # WunderGraph publish client package example
 
+*** 整個大改，現在只剩下 cosmo 這東西了 federation graphql 了 ****
+
 This example shows how to bundle the generated client code for distribution to NPM.
 
 ## Getting started
 
 ```bash
 
-docker run -d \
-  --name=postgres\
-  -v db-postgres01:/var/lib/postgresql/data \
+docker run -d --name=postgres\
+  -v db-postgresql:/var/lib/postgresql/data \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_PASSWORD=9987654321qaz \
   -e POSTGRES_DB=postgres \
   -p 5433:5432 \
-  postgres:16.3-alpine
-  
-npx postgraphile -c 'postgres://dvdrental_admin:07770ad8-da77-41c3-92f8-8b397075f732@localhost:8888/dvdrental_db' \
-  --watch \
+  --net=net-postgres \
+  postgres:17.6-alpine
+
+
+npm i postgraphile postgraphile-federation-plugin -g
+
+npx postgraphile -c 'postgres://dvdrental_admin:07770ad8-da77-41c3-92f8-8b397075f732@localhost:5433/dvdrental_db' \
+  --port 5000 \
   --skip-plugins graphile-build:NodePlugin \
-  --enhance-graphiql \
+  --append-plugins postgraphile-federation-plugin \
   --dynamic-json \
-  --allow-explain
+  --no-setof-functions-contain-nulls
+
+npx postgraphile -c 'postgres://postgres:9987654321qaz@localhost:5433/dvdrental_db' \
+  --port 5000 \
+  --skip-plugins graphile-build:NodePlugin \
+  --append-plugins postgraphile-federation-plugin \
+  --dynamic-json \
+  --no-setof-functions-contain-nulls \
+  --enhance-graphiql \
+  --allow-explain \
+  --watch
+
+
+  "mcpServers": {
+      "mcp-graphql": {
+          "command": "npx",
+          "args": ["mcp-graphql"],
+          "env": {
+              "ENDPOINT": "http://localhost:5000/graphql"
+          }
+      }
+  }
 
 
 
 ======================
 
-localhost:5432
+localhost:5433
 dvdrental_db
 dvdrental_admin
 40a6adea4d414b7bb786567c007ebc61
-
-npx postgraphile -c 'postgres://dvdrental_admin:40a6adea4d414b7bb786567c007ebc61@localhost:5432/dvdrental_db' \
-  --watch \
-  --skip-plugins graphile-build:NodePlugin \
-  --enhance-graphiql \
-  --dynamic-json \
-  --allow-explain
-
 
 === examples ===
 https://docs.wundergraph.com/docs/architecture
